@@ -83,4 +83,71 @@ class ORM extends log
         $result = $this->execQuery($query);
         return $result;
     }
+    public function remove($table, $where = "")
+    {
+        $query = "DELETE FROM " . $table . " WHERE " . $where;
+        $result = $this->execQuery($query);
+        return $result;
+    }
+
+    public function find($table, $id)
+    {
+        $query = "SELECT * FROM " . $table . " WHERE id=" . $id;
+
+        $result = $this->execQuery($query);
+        return $result;
+    }
+
+    public function findAll($table)
+    {
+        $query = "SELECT * FROM " . $table;
+
+        $result = $this->execQuery($query);
+        return $result;
+    }
+
+    public function findBy($table, $field, $value)
+    {
+        $query = "SELECT * FROM " . $table . " WHERE " . $field . "='" . $value . "'";
+
+        $result = $this->execQuery($query);
+        return $result;
+    }
+
+    public function findOneBy($table, $field, $value)
+    {
+
+        $query = "SELECT * FROM " . $table . " WHERE " . $field . "='" . $value . "' LIMIT 1";
+
+        $result = $this->execQuery($query);
+
+        if (!empty($result))
+            return $result[0];
+        return null;
+    }
+
+    public function count($table, $row = "*", $where = "")
+    {
+        $query = "SELECT COUNT(". $row .") FROM " . $table;
+
+        if ($where)
+            $query .= " WHERE " . $where;
+
+        $result = $this->execQuery($query);
+
+        if($result){
+            $array = get_object_vars($result[0]);
+            return intval($array['COUNT(*)']);
+        }
+        return 0;
+    }
+
+    public function check($table, $row, $where = "")
+    {
+        $query = "SELECT ". $row ." FROM " . $table . " WHERE " . $where;
+
+        $result = $this->execQuery($query);
+
+        return !empty($result);
+    }
 }
