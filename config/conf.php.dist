@@ -1,6 +1,6 @@
 <?php
 $config = [
-    "host" => "mysql:host=127.0.0.1;dbname=cinema",
-    "user" => "symfony",
-    "password" => "symfony",
+    "host" => "mysql:host=HOST;dbname=DBNAME",
+    "user" => "USER",
+    "password" => "PASSWORD",
 ];
