@@ -1,6 +1,6 @@
 <?php
 
-require_once "./Entityorm.php";
+require_once "./Entity/orm.php";
 require_once "./config/conf.php";
 
 if ($argc > 1) {
