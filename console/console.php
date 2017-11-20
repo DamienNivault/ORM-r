@@ -1,6 +1,6 @@
 <?php
 
-require_once "./orm/class/orm.php";
+require_once "./Entityorm.php";
 require_once "./config/conf.php";
 
 if ($argc > 1) {
@@ -62,4 +62,64 @@ if ($argc > 1) {
             echo("Row updated");
         else
             echo("error, please show your log");
+    } elseif ($argv[1] == "database:create") {
+
+        $hostConfig = explode(";", $config['host']);
+
+        if(sizeof($hostConfig) < 1){
+            echo("Error, missing host config");
+            return -1;
+        }
+
+        $newConfig = [
+            "host" => $hostConfig[0],
+            "user" => "root",
+            "password" => "",
+        ];
+
+        $dbName = explode("=", $hostConfig[1])[1];
+
+        $orm = new ORM($newConfig);
+
+        $query = "CREATE DATABASE " . $dbName . " CHARACTER SET 'latin1'";
+
+        $result = $orm->execQuery($query);
+
+        if (!$result)
+            echo("Database created");
+        else
+            echo("error, please show your log");
     }
+    elseif ($argv[1] == "database:drop") {
+
+        $hostConfig = explode(";", $config['host']);
+
+        if(sizeof($hostConfig) < 1){
+            echo("Error, missing host config");
+            return -1;
+        }
+
+        $newConfig = [
+            "host" => $hostConfig[0],
+            "user" => "root",
+            "password" => "",
+        ];
+
+        $dbName = explode("=", $hostConfig[1])[1];
+
+        $orm = new ORM($newConfig);
+
+        $orm = new ORM($config);
+
+        $query = "DROP DATABASE " . $dbName;
+
+        $result = $orm->execQuery($query);
+
+        if (!$result)
+            echo("Database dropped");
+        else
+            echo("error, please show your log");
+    }else{
+        echo("Error, show command list if you want more help");
+    }
+}
