@@ -122,4 +122,8 @@ if ($argc > 1) {
     }else{
         echo("Error, show command list if you want more help");
     }
+} else {
+    $helpFile = fopen("./orm/console/help.txt", "r") or die("Unable to open file!");
+    echo fread($helpFile, filesize("./orm/console/help.txt"));
+    fclose($helpFile);
 }
