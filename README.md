@@ -5,7 +5,7 @@ Information:
 ------------
 
 * Compatibilité mySQL
-* Terminal de commaande afin d'aider l'utilisateur (php orm/console/console.php)
+* Terminal de commande afin d'aider l'utilisateur (php orm/console/console.php)
 * Une gestion des logs est possible (pensez a avoir un dossier log à la racine du projet)
 * La base de donnée peut Être crée via une commande, mais les tables doivent être faite manuellement
 * Possibilitée de supprimer toute la base de données
